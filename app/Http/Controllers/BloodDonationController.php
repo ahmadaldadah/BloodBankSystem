@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\BloodDonation;
+use App\Models\BloodTransaction;
 use App\Models\BloodType;
 use App\Models\Donor;
+use App\Models\Recipient;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -53,7 +55,6 @@ class BloodDonationController extends Controller
         // $request->all();
         // $request->input('title');
         $request->validate([
-            'bloodID' => 'required',
             'donorID' => 'required',
             'dateDonated' => 'required',
             'quantity' => 'required'
@@ -62,7 +63,6 @@ class BloodDonationController extends Controller
         ]);
 
         $bloodDonation = new BloodDonation();
-        $bloodDonation->bloodID = $request->bloodID;
         $bloodDonation->donorID = $request->donorID;
         $bloodDonation->dateDonated = $request->dateDonated;
         $bloodDonation->quantity = $request->quantity;
@@ -125,14 +125,41 @@ class BloodDonationController extends Controller
      */
     public function update(Request $request,int  $bloodID)
     {
+
+        $bloodDonationElement= BloodDonation::where('bloodID',$bloodID) -> first();
+        $previous = $bloodDonationElement->quantity;
+        $new = $request->quantity;
+        if ($previous > $new){
+            $value = $previous - $new;
+        }else{
+            $value = $new - $previous;
+        }
+
         $request->validate([
-            'bloodID' => 'required',
+//            'bloodID' => 'required',
             'donorID' => 'required',
             'dateDonated' => 'required',
             'quantity' => 'required',
         ]);
         $data= request()->except(['_token','_method']);
         $bloodDonation= BloodDonation::where('bloodID',$bloodID) -> update($data);
+        $donor = Donor::where('donorID', '=', $request->donorID)->first();
+        $bloodType = $donor->bloodType;
+
+        $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
+        if ($previous > $new){
+            $totalQuantity = $bloodTypes->totalQuantity -= $value;
+        }else{
+            $totalQuantity = $bloodTypes->totalQuantity += $value;
+        }
+        $data = [
+            'typeID'=>$bloodTypes->typeID,
+            'typeName'=>$bloodTypes->typeName,
+            'totalQuantity'=>$totalQuantity,
+
+        ];
+        BloodType::where('typeID','=',$bloodType)->update($data);
+
         return redirect('bloodDonation');
     }
 
@@ -144,8 +171,20 @@ class BloodDonationController extends Controller
      */
     public function destroy($bloodID)
     {
-        $bloodDonation = BloodDonation::where('bloodID', '=', $bloodID)->delete();
+        $bloodDonation = BloodDonation::where('bloodID', '=', $bloodID)->first();
+        $donor = Donor::where('donorID', '=', $bloodDonation->donorID)->first();
 
+        $bloodType = $donor->bloodType;
+
+        $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
+
+        $data = [
+            'typeID'=>$bloodTypes->typeID,
+            'typeName'=>$bloodTypes->typeName,
+            'totalQuantity'=>$bloodTypes->totalQuantity -= $bloodDonation->quantity
+        ];
+        BloodType::where('typeID','=',$bloodType)->update($data);
+        BloodDonation::where('bloodID', '=', $bloodID)->delete();
 
         return redirect()->route('bloodDonation.index');
     }

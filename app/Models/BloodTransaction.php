@@ -11,9 +11,6 @@ class BloodTransaction extends Model
     public function medical_personnel(){
         return $this->belongsTo(MedicalPersonnel::class);
     }
-    public function blood_donation(){
-        return $this->belongsTo(BloodDonation::class);
-    }
     public function recipients(){
         return $this->belongsTo(Recipient::class);
     }

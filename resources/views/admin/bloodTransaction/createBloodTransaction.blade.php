@@ -30,26 +30,6 @@
 
                             @csrf
 
-                            <div class="form-group">
-                                <label for="transactID" class="col-md-2 control-label"
-                                >TransactID</label
-                                >
-
-                                <div class="col-md-8">
-                                    <input
-                                        class="form-control"
-                                        required="required"
-                                        id="transactID"
-                                        name="transactID">
-
-
-
-
-                                    <span class="help-block">
-                        <strong></strong>
-                      </span>
-                                </div>
-                            </div>
 
 
                             <div class="form-group">
@@ -143,54 +123,54 @@
                                     </div>
 
 
-                                    <div class="form-group">
-                                        <label for="bloodType" class="col-md-2 control-label"
-                                        >BloodType</label
-                                        >
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="bloodType" class="col-md-2 control-label"--}}
+{{--                                        >BloodType</label--}}
+{{--                                        >--}}
 
-                                        <div class="col-md-8">
+{{--                                        <div class="col-md-8">--}}
 
-                                            <select
-                                                class="form-control"
+{{--                                            <select--}}
+{{--                                                class="form-control"--}}
 
-                                                autofocus="autofocus"
-                                                name="bloodType"
-                                                type="text"
-                                                id="bloodType"
-                                            >
-                                                @foreach ($blood_types as $blood_type)
-                                                    <option value="{!! $blood_type->typeID !!}">{!! $blood_type->typeName!!}</option>
-                                                @endforeach
-                                            </select>
+{{--                                                autofocus="autofocus"--}}
+{{--                                                name="bloodType"--}}
+{{--                                                type="text"--}}
+{{--                                                id="bloodType"--}}
+{{--                                            >--}}
+{{--                                                @foreach ($blood_types as $blood_type)--}}
+{{--                                                    <option value="{!! $blood_type->typeID !!}">{!! $blood_type->typeName!!}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
 
-                                            <span class="help-block">
-                        <strong></strong>
-                      </span>
-                                        </div>
-                                    </div>
+{{--                                            <span class="help-block">--}}
+{{--                        <strong></strong>--}}
+{{--                      </span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="form-group">
-                                        <label for="bloodID" class="col-md-2 control-label"
-                                        >bloodID</label
-                                        >
+{{--                                    <div class="form-group">--}}
+{{--                                        <label for="bloodID" class="col-md-2 control-label"--}}
+{{--                                        >bloodID</label--}}
+{{--                                        >--}}
 
-                                        <div class="col-md-8">
-                                            <select
-                                                class="form-control"
-                                                required="required"
-                                                id="bloodID"
-                                                name="bloodID">
-                                                @foreach ($blood_donations as $blood_donation)
-                                                    <option value="{{ $blood_donation->bloodID }}">{{ $blood_donation->bloodID}}</option>
-                                                @endforeach
-                                            </select>
+{{--                                        <div class="col-md-8">--}}
+{{--                                            <select--}}
+{{--                                                class="form-control"--}}
+{{--                                                required="required"--}}
+{{--                                                id="bloodID"--}}
+{{--                                                name="bloodID">--}}
+{{--                                                @foreach ($blood_donations as $blood_donation)--}}
+{{--                                                    <option value="{{ $blood_donation->bloodID }}">{{ $blood_donation->bloodID}}</option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
 
 
-                                            <span class="help-block">
-                        <strong></strong>
-                      </span>
-                                        </div>
-                                    </div>
+{{--                                            <span class="help-block">--}}
+{{--                        <strong></strong>--}}
+{{--                      </span>--}}
+{{--                                        </div>--}}
+{{--                                    </div> --}}
 
                                 </div>
                             </div>

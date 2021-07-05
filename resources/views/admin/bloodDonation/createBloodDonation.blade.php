@@ -29,30 +29,6 @@
                         >
 
                             @csrf
-                            <div class="form-group">
-                                <label for="bloodID" class="col-md-2 control-label"
-                                >bloodID</label
-                                >
-
-                                <div class="col-md-8 {{ $errors->first('bloodID') ? "has-error" : ""}}">
-                                    <input
-                                        class="form-control"
-
-                                        autofocus="autofocus"
-                                        name="bloodID"
-                                        type="number"
-                                        id="bloodID"
-                                    />
-
-                                    <div class="text-danger">
-                                        {{$errors->first('bloodID')}}
-                                    </div>
-                                    <span class="help-block">
-                        <strong></strong>
-                      </span>
-                                </div>
-                            </div>
-
 
 
                             <div class="form-group">

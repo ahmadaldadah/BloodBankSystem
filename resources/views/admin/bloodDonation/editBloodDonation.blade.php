@@ -28,27 +28,6 @@
                             {{-- <input type="hidden" name="_method" value="put"> --}}
                             @method('put')
                             @csrf
-                            <div class="form-group">
-                                <label for="bloodID" class="col-md-2 control-label"
-                                >bloodID</label
-                                >
-
-                                <div class="col-md-8">
-                                    <input
-                                        class="form-control"
-                                        required="required"
-                                        autofocus="autofocus"
-                                        name="bloodID"
-
-                                        value="{{$bloodDonation->bloodID}}"
-                                        id="bloodID"
-                                    />
-
-                                    <span class="help-block">
-                        <strong></strong>
-                      </span>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label for="donorID" class="col-md-2 control-label"

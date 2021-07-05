@@ -20,7 +20,6 @@ class CreateBloodTransactionsTable extends Migration
             $table->integer('quantity');
             $table->unsignedBigInteger('recipientsID');
             $table->string('bloodType','3');
-            $table->unsignedBigInteger('bloodID');
             $table->timestamps();
         });
     }

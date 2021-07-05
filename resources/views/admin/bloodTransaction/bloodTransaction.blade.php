@@ -26,7 +26,6 @@
                                 <th>Quantity</th>
                                 <th>Recipients ID</th>
                                 <th>Blood Type</th>
-                                <th>Blood ID</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -57,7 +56,6 @@
                                     @elseif($blood_transaction->bloodType == 8)
                                         <td>{{"O-"}}</td>
                                     @endif
-                                    <td>{{$blood_transaction->bloodID }}</td>
                                     <td>
                                         <a href="{{ route('bloodTransaction.edit', ['transactID' => $blood_transaction->transactID]) }}" class="btn btn-xs btn-info">Edit</a>
 {{--                                        <a href="{{ route('donor.destroy', ['donorID' => $donor->donorID]) }}" class="btn btn-xs btn-danger">delete</a>--}}

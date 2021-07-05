@@ -11,7 +11,5 @@ class BloodDonation extends Model
     public function donors(){
         return $this->belongsTo(Donor::class);
     }
-    public  function  blood_transactions(){
-        return $this->hasMany(BloodTransaction::class);
-    }
+
 }

@@ -60,31 +60,30 @@ class BloodTransactionController extends Controller
         // $request->all();
         // $request->input('title');
         $request->validate([
-            'transactID' => 'required',
             'empID' => 'required',
             'dateOut' => 'required',
             'quantity' => 'required',
             'recipientsID' => 'required',
-            'bloodType' => 'required|max:3',
-            'bloodID' => 'required',
+//            'bloodType' => 'required|max:3',
+//            'bloodID' => 'required',
 
 
         ]);
 
+        $recipients = Recipient::where('recipientsID', '=', $request->recipientsID)->first();
+        $bloodType = $recipients->bloodType;
+
         $bloodTransaction = new BloodTransaction();
-        $bloodTransaction->transactID = $request->transactID;
         $bloodTransaction->empID = $request->empID;
         $bloodTransaction->dateOut = $request->dateOut;
         $bloodTransaction->quantity = $request->quantity;
         $bloodTransaction->recipientsID = $request->recipientsID;
-        $bloodTransaction->bloodType = $request->bloodType;
-        $bloodTransaction->bloodID = $request->bloodID;
+        $bloodTransaction->bloodType = $bloodType;
+//        $bloodTransaction->bloodID = $request->bloodID;
         $bloodTransaction->save();
 
-        $recipients = Recipient::where('recipientsID', '=', $request->recipientsID)->first();
 //        dd($donors);
 
-        $bloodType = $recipients->bloodType;
 
         $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
 
@@ -140,17 +139,42 @@ class BloodTransactionController extends Controller
      */
     public function update(Request $request,int  $transactID)
     {
+        $bloodTransactionElement = BloodTransaction::where('transactID',$request->transactID) -> first();
+        $previous = $bloodTransactionElement->quantity;
+        $new = $request->quantity;
+        if ($previous > $new){
+            $value = $previous - $new;
+        }else{
+            $value = $new - $previous;
+        }
+
         $request->validate([
-            'transactID' => 'required',
             'empID' => 'required',
             'dateOut' => 'required',
             'quantity' => 'required',
             'recipientsID' => 'required',
-            'bloodType' => 'required|max:3',
-            'bloodID' => 'required',
+
         ]);
         $data= request()->except(['_token','_method']);
         $bloodTransaction = BloodTransaction::where('transactID',$request->transactID) -> update($data);
+
+        $recipients = Recipient::where('recipientsID', '=', $request->recipientsID)->first();
+        $bloodType = $recipients->bloodType;
+
+        $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
+        if ($previous > $new){
+            $totalQuantity = $bloodTypes->totalQuantity += $value;
+        }else{
+            $totalQuantity = $bloodTypes->totalQuantity -= $value;
+        }
+        $data = [
+            'typeID'=>$bloodTypes->typeID,
+            'typeName'=>$bloodTypes->typeName,
+            'totalQuantity'=>$totalQuantity,
+
+        ];
+        BloodType::where('typeID','=',$bloodType)->update($data);
+
         return redirect('bloodTransaction');
     }
 
@@ -162,9 +186,20 @@ class BloodTransactionController extends Controller
      */
     public function destroy($transactID)
     {
-        $bloodTransaction = BloodTransaction::where('transactID', '=', $transactID)->delete();
+        $bloodTransaction = BloodTransaction::where('transactID', '=', $transactID)->first();
+        $recipients = Recipient::where('recipientsID', '=', $bloodTransaction->recipientsID)->first();
 
+        $bloodType = $recipients->bloodType;
 
+        $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
+
+        $data = [
+            'typeID'=>$bloodTypes->typeID,
+            'typeName'=>$bloodTypes->typeName,
+            'totalQuantity'=>$bloodTypes->totalQuantity += $bloodTransaction->quantity
+        ];
+        BloodType::where('typeID','=',$bloodType)->update($data);
+        BloodTransaction::where('transactID', '=', $transactID)->delete();
         return redirect()->route('bloodTransaction.index');
     }
 }
