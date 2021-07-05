@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BloodDonation;
 use App\Models\BloodTransaction;
 use App\Models\BloodType;
+use App\Models\Donor;
 use App\Models\MedicalPersonnel;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
@@ -40,8 +41,11 @@ class BloodTransactionController extends Controller
         // if (Gate::denies('accessAdmin')) {
         //     return redirect('/home');
         // }
-        return view('admin.bloodTransaction.createBloodTransaction' , ['medical_personnels'=>MedicalPersonnel::all('empID','firstName') ,
-            'recipients'=>Recipient::all('recipientsID','firstName'), 'blood_donations'=>BloodDonation::all('bloodID') ]);
+        return view('admin.bloodTransaction.createBloodTransaction' ,
+            ['medical_personnels'=>MedicalPersonnel::all('empID','firstName') ,
+                'recipients'=>Recipient::all('recipientsID','firstName'),
+                'blood_donations'=>BloodDonation::all('bloodID'),
+                'blood_types'=>BloodType::all('typeID','typeName') ]);
     }
 
     /**
@@ -76,9 +80,21 @@ class BloodTransactionController extends Controller
         $bloodTransaction->bloodType = $request->bloodType;
         $bloodTransaction->bloodID = $request->bloodID;
         $bloodTransaction->save();
-        $bloodType = BloodType::where('typeID','=','bloodType')->first();
-        $bloodType->totalQuantity -= $request->bloodType ;
-        $bloodType->save();
+
+        $recipients = Recipient::where('recipientsID', '=', $request->recipientsID)->first();
+//        dd($donors);
+
+        $bloodType = $recipients->bloodType;
+
+        $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
+
+        $data = [
+            'typeID'=>$bloodTypes->typeID,
+            'typeName'=>$bloodTypes->typeName,
+            'totalQuantity'=>$bloodTypes->totalQuantity -= $request->quantity
+        ];
+        BloodType::where('typeID','=',$bloodType)->update($data);
+
         return redirect('bloodTransaction');
     }
 
@@ -111,7 +127,8 @@ class BloodTransactionController extends Controller
             ->with('bloodTransaction' , $bloodTransaction)
             ->with('medical_personnels', MedicalPersonnel::all(['empID','firstName']))
             ->with('recipients', Recipient::all(['recipientsID','firstName']))
-            ->with('blood_donations', BloodDonation::all(['bloodID']));
+            ->with('blood_donations', BloodDonation::all(['bloodID']))
+            ->with('blood_types',BloodType::all('typeID','typeName'));
     }
 
     /**

@@ -150,15 +150,18 @@
 
                                         <div class="col-md-8">
 
-                                            <input
+                                            <select
                                                 class="form-control"
 
                                                 autofocus="autofocus"
                                                 name="bloodType"
                                                 type="text"
                                                 id="bloodType"
-
                                             >
+                                                @foreach ($blood_types as $blood_type)
+                                                    <option value="{!! $blood_type->typeID !!}">{!! $blood_type->typeName!!}</option>
+                                                @endforeach
+                                            </select>
 
                                             <span class="help-block">
                         <strong></strong>

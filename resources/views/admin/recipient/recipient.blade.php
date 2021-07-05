@@ -13,6 +13,7 @@
                     <div class="panel-heading">
                         Recipient
 
+
                     </div>
 
                     <div class="panel-body">
@@ -38,30 +39,27 @@
                                     <td>{{$recipient->phone }}</td>
                                     <td>{{$recipient->address}}</td>
                                     <td>{{$recipient->dateOfBirth}}</td>
-                                    <td>{{$recipient->bloodType}}</td>
-                                    @if($donor->bloodType == 1)
+                                    @if($recipient->bloodType == 1)
                                         <td>{{"A+"}}</td>
-                                    @elseif($donor->bloodType == 2)
+                                    @elseif($recipient->bloodType == 2)
                                         <td>{{"A-"}}</td>
-                                    @elseif($donor->bloodType == 2)
+                                    @elseif($recipient->bloodType == 2)
                                         <td>{{"A-"}}</td>
-                                    @elseif($donor->bloodType == 3)
+                                    @elseif($recipient->bloodType == 3)
                                         <td>{{"B+"}}</td>
-                                    @elseif($donor->bloodType == 4)
+                                    @elseif($recipient->bloodType == 4)
                                         <td>{{"B-"}}</td>
-                                    @elseif($donor->bloodType == 5)
+                                    @elseif($recipient->bloodType == 5)
                                         <td>{{"AB+"}}</td>
-                                    @elseif($donor->bloodType == 6)
+                                    @elseif($recipient->bloodType == 6)
                                         <td>{{"AB-"}}</td>
-                                    @elseif($donor->bloodType == 7)
+                                    @elseif($recipient->bloodType == 7)
                                         <td>{{"O+"}}</td>
-                                    @elseif($donor->bloodType == 8)
+                                    @elseif($recipient->bloodType == 8)
                                         <td>{{"O-"}}</td>
                                     @endif
                                     <td>
                                         <a href="{{ route('recipient.edit', ['recipientsID' => $recipient->recipientsID]) }}" class="btn btn-xs btn-info">Edit</a>
-{{--                                        <a href="{{ route('donor.destroy', ['donorID' => $donor->donorID]) }}" class="btn btn-xs btn-danger">delete</a>--}}
-
                                         <form style="display: inline;" action="{{ route('recipient.destroy', ['recipientsID' => $recipient->recipientsID]) }}" method="POST">
                                             @method('DELETE')
                                             @csrf

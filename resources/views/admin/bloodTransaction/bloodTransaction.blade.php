@@ -38,7 +38,25 @@
                                     <td>{{$blood_transaction->dateOut }}</td>
                                     <td>{{$blood_transaction->quantity}}</td>
                                     <td>{{$blood_transaction->recipientsID }}</td>
-                                    <td>{{$blood_transaction->bloodType }}</td>
+                                    @if($blood_transaction->bloodType == 1)
+                                        <td>{{"A+"}}</td>
+                                    @elseif($blood_transaction->bloodType == 2)
+                                        <td>{{"A-"}}</td>
+                                    @elseif($blood_transaction->bloodType == 2)
+                                        <td>{{"A-"}}</td>
+                                    @elseif($blood_transaction->bloodType == 3)
+                                        <td>{{"B+"}}</td>
+                                    @elseif($blood_transaction->bloodType == 4)
+                                        <td>{{"B-"}}</td>
+                                    @elseif($blood_transaction->bloodType == 5)
+                                        <td>{{"AB+"}}</td>
+                                    @elseif($blood_transaction->bloodType == 6)
+                                        <td>{{"AB-"}}</td>
+                                    @elseif($blood_transaction->bloodType == 7)
+                                        <td>{{"O+"}}</td>
+                                    @elseif($blood_transaction->bloodType == 8)
+                                        <td>{{"O-"}}</td>
+                                    @endif
                                     <td>{{$blood_transaction->bloodID }}</td>
                                     <td>
                                         <a href="{{ route('bloodTransaction.edit', ['transactID' => $blood_transaction->transactID]) }}" class="btn btn-xs btn-info">Edit</a>

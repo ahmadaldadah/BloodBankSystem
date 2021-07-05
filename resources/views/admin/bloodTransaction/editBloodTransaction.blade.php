@@ -152,19 +152,22 @@
 
                             <div class="form-group">
                                 <label for="bloodType" class="col-md-2 control-label"
-                                >BloodType</label
+                                >Blood Type</label
                                 >
 
                                 <div class="col-md-8">
-                                    <input
+                                    <select
                                         class="form-control"
                                         required="required"
-                                        autofocus="autofocus"
                                         name="bloodType"
                                         type="text"
-                                        value="{{$bloodTransaction->bloodType}}"
                                         id="bloodType"
                                     >
+                                        @foreach ($blood_types as $blood_type)
+                                            <option value={{$blood_type->typeID}}
+                                            >{{$blood_type->typeName}}</option>
+                                        @endforeach
+                                    </select>
 
                                     <span class="help-block">
                         <strong></strong>
