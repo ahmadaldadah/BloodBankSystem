@@ -18,7 +18,7 @@ class CreateRecipientsTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('address');
-            $table->integer('phone')->unique();
+            $table->integer('phone');
             $table->date('dateOfBirth');
             $table->string('bloodType',3);
             $table->timestamps();

@@ -18,8 +18,8 @@ class CreateMedicalPersonnelsTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('address');
-            $table->integer('phone')->unique();
-            $table->string('email')->unique();
+            $table->integer('phone');
+            $table->string('email');
             $table->date('dateOfBirth');
             $table->timestamps();
         });

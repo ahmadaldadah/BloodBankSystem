@@ -12,12 +12,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Recipient
-                        <a href="{{ route('recipient.create') }}" class="btn btn-xs btn-success">Create Recipient</a>
 
                     </div>
 
                     <div class="panel-body">
                         <table class="table" id="datatable">
+                            <a href="{{ route('recipient.create') }}" class="btn btn-xs btn-success">Create Recipient</a>
+
                             <thead>
                             <tr>
                                 <th>First name</th>
@@ -38,6 +39,25 @@
                                     <td>{{$recipient->address}}</td>
                                     <td>{{$recipient->dateOfBirth}}</td>
                                     <td>{{$recipient->bloodType}}</td>
+                                    @if($donor->bloodType == 1)
+                                        <td>{{"A+"}}</td>
+                                    @elseif($donor->bloodType == 2)
+                                        <td>{{"A-"}}</td>
+                                    @elseif($donor->bloodType == 2)
+                                        <td>{{"A-"}}</td>
+                                    @elseif($donor->bloodType == 3)
+                                        <td>{{"B+"}}</td>
+                                    @elseif($donor->bloodType == 4)
+                                        <td>{{"B-"}}</td>
+                                    @elseif($donor->bloodType == 5)
+                                        <td>{{"AB+"}}</td>
+                                    @elseif($donor->bloodType == 6)
+                                        <td>{{"AB-"}}</td>
+                                    @elseif($donor->bloodType == 7)
+                                        <td>{{"O+"}}</td>
+                                    @elseif($donor->bloodType == 8)
+                                        <td>{{"O-"}}</td>
+                                    @endif
                                     <td>
                                         <a href="{{ route('recipient.edit', ['recipientsID' => $recipient->recipientsID]) }}" class="btn btn-xs btn-info">Edit</a>
 {{--                                        <a href="{{ route('donor.destroy', ['donorID' => $donor->donorID]) }}" class="btn btn-xs btn-danger">delete</a>--}}

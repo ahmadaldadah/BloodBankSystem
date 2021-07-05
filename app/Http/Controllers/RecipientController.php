@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BloodType;
 use App\Models\Recipient;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,7 +36,7 @@ class RecipientController extends Controller
         // if (Gate::denies('accessAdmin')) {
         //     return redirect('/home');
         // }
-        return view('admin.recipient.createRecipient');
+        return view('admin.recipient.createRecipient',['blood_types'=>BloodType::all('typeID','typeName')]);
     }
 
     /**
@@ -46,9 +47,7 @@ class RecipientController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $request->all();
-        // $request->input('title');
+
         $request->validate([
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
@@ -95,7 +94,8 @@ class RecipientController extends Controller
 
 
         return view('admin.recipient.editRecipient')
-            ->with('recipient' , $recipient);
+            ->with('recipient' , $recipient)
+            ->with('blood_types',BloodType::all('typeID','typeName'));
     }
 
     /**

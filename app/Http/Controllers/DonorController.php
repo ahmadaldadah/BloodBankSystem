@@ -49,9 +49,7 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $request->all();
-        // $request->input('title');
+
         $request->validate([
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
