@@ -154,7 +154,11 @@
                                             id="bloodType"
                                         >
                                             @foreach ($blood_types as $blood_type)
-                                                <option value={{$blood_type->typeID}}
+                                                <option
+                                                    @if($donor->bloodType == $blood_type->typeID)
+                                                        selected
+                                                    @endif
+                                                    value={{$blood_type->typeID}}
                                                 >{{$blood_type->typeName}}</option>
                                             @endforeach
                                         </select>

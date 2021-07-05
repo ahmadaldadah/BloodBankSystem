@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BloodDonation;
 use App\Models\Donor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +31,14 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function bloodDonation(Request $request){
+        $donor = Donor::where('user_id','=',$request->user()->id)->first();
+//        dd($donor);
+        $donations = BloodDonation::where('donorID','=',$donor->donorID)->get();
+        return collect([
+            'data' => $donations,
+        ]);
+    }
     public function loginApi(Request $request)
     {
 
@@ -42,12 +52,13 @@ class HomeController extends Controller
             return response()->json(['message' => 'phone or password is incorrect'], 401);
         }
         $user = $request->user();
-
-//        $tokenResult = $user->createToken('authToken')->accessToken;
-        $tokenResult = 'iiiiiiiiiiiiiiiii';
+        $donor = Donor::where('user_id','=',$user->id)->first();
+        $tokenResult = $user->createToken('authToken')->accessToken;
+//        $tokenResult = 'iiiiiiiiiiiiiiiii';
 
         return collect([
-//            'data' => new UserResource(Auth::user()),
+            'data' => ['user'=>$user,
+                'donor'=>$donor],
             'access_token' => $tokenResult,
         ]);
     }

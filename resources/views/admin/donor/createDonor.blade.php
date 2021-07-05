@@ -30,7 +30,53 @@
 
                             @csrf
                             <div class="form-group">
-                                <label for="title" class="col-md-2 control-label"
+                                <label for="email" class="col-md-2 control-label"
+                                >Email</label
+                                >
+
+                                <div class="col-md-8 {{ $errors->first('email') ? "has-error" : ""}}">
+                                    <input
+                                        class="form-control"
+
+                                        autofocus="autofocus"
+                                        name="email"
+                                        type="email"
+                                        id="email"
+                                    />
+
+                                    <div class="text-danger">
+                                        {{$errors->first('email')}}
+                                    </div>
+                                    <span class="help-block">
+                        <strong></strong>
+                      </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 control-label"
+                                >Password</label
+                                >
+
+                                <div class="col-md-8 {{ $errors->first('password') ? "has-error" : ""}}">
+                                    <input
+                                        class="form-control"
+
+                                        autofocus="autofocus"
+                                        name="password"
+                                        type="password"
+                                        id="password"
+                                    />
+
+                                    <div class="text-danger">
+                                        {{$errors->first('password')}}
+                                    </div>
+                                    <span class="help-block">
+                        <strong></strong>
+                      </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName" class="col-md-2 control-label"
                                 >First Name</label
                                 >
 

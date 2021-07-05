@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'App\Http\Controllers\BloodTypeController@index')->name('home');
+Route::get('/home', 'App\Http\Controllers\BloodTypeController@index')->name('home');
 Route::resource('/donor','App\Http\Controllers\DonorController')->middleware('auth')->parameters([
     'donor' => 'donorID',
 ]);

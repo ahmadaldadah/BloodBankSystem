@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\BloodType;
 use App\Models\Donor;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+
 class DonorController extends Controller
 {
 
@@ -51,6 +54,8 @@ class DonorController extends Controller
     {
 
         $request->validate([
+            'email' => 'required',
+            'password' => 'required',
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
             'phone' => 'required',
@@ -59,7 +64,14 @@ class DonorController extends Controller
 
         ]);
 
+        $user = new User();
+        $user->email=$request->email;
+        $user->password= Hash::make($request['password']);
+        $user->name = $request->firstName." ".$request->lastName;
+        $user->save();
+
         $donor = new Donor();
+        $donor->user_id  = $user->id;
         $donor->firstName = $request->firstName;
         $donor->lastName = $request->lastName;
         $donor->address = $request->address;
@@ -129,8 +141,11 @@ class DonorController extends Controller
      */
     public function destroy($donorID)
     {
-        $donor = Donor::where('donorID', '=', $donorID)->delete();
-
+        $donor = Donor::where('donorID', '=', $donorID);
+        $donorFirst = $donor->first();
+        $user = User::where('id','=',$donorFirst->user_id);
+        $donor->delete();
+        $user->delete();
 
         return redirect()->route('donor.index');
     }
