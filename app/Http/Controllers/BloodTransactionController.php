@@ -44,7 +44,6 @@ class BloodTransactionController extends Controller
         return view('admin.bloodTransaction.createBloodTransaction' ,
             ['medical_personnels'=>MedicalPersonnel::all('empID','firstName') ,
                 'recipients'=>Recipient::all('recipientsID','firstName'),
-                'blood_donations'=>BloodDonation::all('bloodID'),
                 'blood_types'=>BloodType::all('typeID','typeName') ]);
     }
 
@@ -56,16 +55,13 @@ class BloodTransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $request->all();
-        // $request->input('title');
+
         $request->validate([
             'empID' => 'required',
             'dateOut' => 'required',
             'quantity' => 'required',
             'recipientsID' => 'required',
-//            'bloodType' => 'required|max:3',
-//            'bloodID' => 'required',
+
 
 
         ]);
@@ -79,7 +75,6 @@ class BloodTransactionController extends Controller
         $bloodTransaction->quantity = $request->quantity;
         $bloodTransaction->recipientsID = $request->recipientsID;
         $bloodTransaction->bloodType = $bloodType;
-//        $bloodTransaction->bloodID = $request->bloodID;
         $bloodTransaction->save();
 
 //        dd($donors);
