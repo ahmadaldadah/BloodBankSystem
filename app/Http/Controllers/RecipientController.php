@@ -51,6 +51,7 @@ class RecipientController extends Controller
         $request->validate([
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
+            'identityNumber' => 'required',
             'phone' => 'required',
             'bloodType' => 'required|max:3'
 
@@ -60,6 +61,7 @@ class RecipientController extends Controller
         $recipient = new Recipient();
         $recipient->firstName = $request->firstName;
         $recipient->lastName = $request->lastName;
+        $recipient->identityNumber = $request->identityNumber;
         $recipient->address = $request->address;
         $recipient->phone = $request->phone;
         $recipient->dateofbirth = $request->dateOfBirth;

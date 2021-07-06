@@ -53,6 +53,7 @@ class MedicalPersonnelController extends Controller
         $request->validate([
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
+            'identityNumber' => 'required',
             'phone' => 'required',
             'email' => 'required'
 
@@ -61,6 +62,7 @@ class MedicalPersonnelController extends Controller
         $medicalPersonnel= new MedicalPersonnel();
         $medicalPersonnel->firstName = $request->firstName;
         $medicalPersonnel->lastName = $request->lastName;
+        $medicalPersonnel->identityNumber = $request->identityNumber;
         $medicalPersonnel->address = $request->address;
         $medicalPersonnel->phone = $request->phone;
         $medicalPersonnel->dateOfBirth = $request->dateOfBirth;

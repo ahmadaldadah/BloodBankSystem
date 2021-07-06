@@ -82,9 +82,11 @@
                                         required="required"
                                         autofocus="autofocus"
                                         name="phone"
-                                        type="integer"
+                                        type="text"
                                         value="{{$medicalPersonnel->phone}}"
                                         id="phone"
+                                        maxlength="10"
+                                        minlength="10"
                                     >
 
 

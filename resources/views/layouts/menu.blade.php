@@ -5,20 +5,30 @@
         <p>Home</p>
     </a>
     <a href="/donor" class="nav-link">
-        Donor
+        <i class="fas fa-table"></i>
+
+        <p>Donor</p>
     </a>
 
     <a href="/recipient" class="nav-link">
-        Recipient
+        <i class="fas fa-table"></i>
+
+        <p>Recipient</p>
     </a>
 
     <a href="/medicalPersonnel" class="nav-link">
-        MedicalPersonnel
+        <i class="fas fa-table"></i>
+
+        <p>MedicalPersonnel</p>
     </a>
     <a href="/bloodDonation" class="nav-link">
-        BloodDonation
+        <i class="fas fa-table"></i>
+
+        <p>BloodDonation</p>
     </a>
     <a href="/bloodTransaction" class="nav-link">
-        BloodTransaction
+        <i class="fas fa-table"></i>
+
+        <p>BloodTransaction</p>
     </a>
 </li>

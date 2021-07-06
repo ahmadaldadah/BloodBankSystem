@@ -84,9 +84,11 @@
                                             required="required"
                                             autofocus="autofocus"
                                             name="phone"
-                                            type="integer"
+                                            type="text"
                                             value="{{$donor->phone}}"
                                             id="phone"
+                                            maxlength="10"
+                                            minlength="10"
                                         >
 
 

@@ -18,23 +18,23 @@
     @yield('styles')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
 <div class="wrapper">
     <!-- Main Header -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+{{--                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>--}}
+                <a href="#" class="nav-link" >
+                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                </a>
+{{--                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>--}}
             </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
-                </a>
-
 
                     <!-- Menu Footer-->
                     <li class="user-footer">
@@ -47,6 +47,7 @@
                             @csrf
                         </form>
                     </li>
+            </li>
         </ul>
     </nav>
 
@@ -61,17 +62,25 @@
     </div>
 
     <!-- Main Footer -->
-
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
 </div>
 
-{{--<script src="{{ mix('js/app.js') }}" defer></script>
+{{--<script src="{{ mix('js/app.js') }}" defer></script>--}}
 
 @yield('third_party_scripts')
 
 @stack('page_scripts')
 
-<script src="{{ asset('js/app.js') }}"></script>--}}
+{{--
+<script src="{{ asset('js/app.js') }}"></script>
+--}}
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 @yield('javascripts')
+<script>
+
+</script>
 </body>
 </html>

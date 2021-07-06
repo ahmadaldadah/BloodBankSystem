@@ -15,7 +15,7 @@
                             >
                         </h2>
 
-                        @include('partials._errors')
+{{--                        @include('partials._errors')--}}
 
                     </div>
 
@@ -30,6 +30,32 @@
 
                             @csrf
                             <div class="form-group">
+                                <label for="identityNumber" class="col-md-2 control-label"
+                                >Identity Number</label
+                                >
+
+                                <div class="col-md-8 {{ $errors->first('identityNumber') ? "has-error" : ""}}">
+                                    <input
+                                        class="form-control"
+
+                                        autofocus="autofocus"
+                                        name="identityNumber"
+                                        type="text"
+                                        id="identityNumber"
+                                        maxlength="10"
+                                        minlength="10"
+                                    />
+
+                                    <div class="text-danger">
+                                        {{$errors->first('identityNumber')}}
+                                    </div>
+                                    <span class="help-block">
+                        <strong></strong>
+                      </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="firstName" class="col-md-2 control-label"
                                 >First Name</label
                                 >
@@ -42,6 +68,7 @@
                                         name="firstName"
                                         type="text"
                                         id="firstName"
+
                                     />
 
                                     <div class="text-danger">
@@ -83,8 +110,10 @@
                                         class="form-control"
                                         autofocus="autofocus"
                                         name="phone"
-                                        type="integer"
+                                        type="text"
                                         id="phone"
+                                        maxlength="10"
+                                        minlength="10"
                                     >
 
 

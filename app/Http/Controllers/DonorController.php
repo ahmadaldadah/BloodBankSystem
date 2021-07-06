@@ -55,6 +55,7 @@ class DonorController extends Controller
 
         $request->validate([
             'email' => 'required',
+            'identityNumber' => 'required',
             'password' => 'required',
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
@@ -72,6 +73,7 @@ class DonorController extends Controller
 
         $donor = new Donor();
         $donor->user_id  = $user->id;
+        $donor->identityNumber = $request->identityNumber;
         $donor->firstName = $request->firstName;
         $donor->lastName = $request->lastName;
         $donor->address = $request->address;
