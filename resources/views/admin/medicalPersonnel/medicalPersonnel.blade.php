@@ -8,16 +8,19 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-12 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Medical Personnel
-                        <a href="{{ route('medicalPersonnel.create') }}" class="btn btn-xs btn-success">Create medicalPersonnel</a>
 
+                        <h1 class='text-center'>Medical Personnel</h1>
+                        <div style="text-align: center">
+                            <a href="{{ route('medicalPersonnel.create') }}" class="btn btn-default btn-lg" style="background-color: #7bd3f7">Create Medical Personnel</a>
+                        </div>
                     </div>
 
                     <div class="panel-body">
                         <table class="table" id="datatable">
+
                             <thead>
                             <tr>
                                 <th>First name</th>

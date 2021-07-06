@@ -8,18 +8,18 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-12 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Donor
-
-
+                    <div class="panel-heading ">
+                        <h1 class='text-center'>Donor</h1>
+                        <div style="text-align: center">
+                            <a href="{{ route('donor.create') }}" class="btn btn-default btn-lg" style="background-color: #7bd3f7">Create Donor</a>
+                        </div>
                     </div>
 
                     <div class="panel-body">
-                        <table class="table" id="datatable">
-                            <a href="{{ route('donor.create') }}" class="btn btn-xs btn-success">Create Donor</a>
 
+                        <table class="table" id="datatable">
                             <thead>
                             <tr>
                                 <th>First name</th>

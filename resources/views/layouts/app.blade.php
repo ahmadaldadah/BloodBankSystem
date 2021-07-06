@@ -34,12 +34,11 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <!-- User image -->
+
 
                     <!-- Menu Footer-->
                     <li class="user-footer">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+
                         <a href="#" class="btn btn-default btn-flat float-right"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Sign out
@@ -48,8 +47,6 @@
                             @csrf
                         </form>
                     </li>
-                </ul>
-            </li>
         </ul>
     </nav>
 
