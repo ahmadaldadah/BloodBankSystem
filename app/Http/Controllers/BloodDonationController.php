@@ -136,7 +136,6 @@ class BloodDonationController extends Controller
         }
 
         $request->validate([
-//            'bloodID' => 'required',
             'donorID' => 'required',
             'dateDonated' => 'required',
             'quantity' => 'required',

@@ -114,6 +114,8 @@ class RecipientController extends Controller
             'lastName' => 'required|max:10',
             'bloodType' => 'required|max:3',
             'phone' => 'required',
+            'identityNumber' => 'required',
+
         ]);
         $data= request()->except(['_token','_method']);
         $recipient = Recipient::where('recipientsID',$recipientsID) -> update($data );

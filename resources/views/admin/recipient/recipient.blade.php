@@ -24,6 +24,7 @@
 
                             <thead>
                             <tr>
+                                <th>RecipientID</th>
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Phone</th>
@@ -36,6 +37,7 @@
                             <tbody>
                             @foreach ($recipients as $recipient)
                                 <tr>
+                                    <td>{{$recipient->recipientsID}}</td>
                                     <td>{{$recipient->firstName }}</td>
                                     <td>{{$recipient->lastName }}</td>
                                     <td>{{$recipient->phone }}</td>

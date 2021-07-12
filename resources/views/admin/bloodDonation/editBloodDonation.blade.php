@@ -71,7 +71,9 @@
                                         value="{{$bloodDonation->dateDonated}}"
                                         id="dateDonated"
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('dateDonated')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -93,7 +95,9 @@
                                         value="{{$bloodDonation->quantity}}"
                                         id="quantity"
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('quantity')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>

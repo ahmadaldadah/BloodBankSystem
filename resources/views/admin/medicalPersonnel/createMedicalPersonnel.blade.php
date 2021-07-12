@@ -42,8 +42,8 @@
                                         name="identityNumber"
                                         type="text"
                                         id="identityNumber"
-                                        maxlength="10"
-                                        minlength="10"
+                                        maxlength="9"
+                                        minlength="9"
                                     />
 
                                     <div class="text-danger">
@@ -93,6 +93,9 @@
                                         type="text"
                                         id="lastName"
                                     />
+                                    <div class="text-danger">
+                                        {{$errors->first('lastName')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -116,8 +119,11 @@
                                         minlength="10"
                                     >
 
-
+                                    <div class="text-danger">
+                                        {{$errors->first('phone')}}
+                                    </div>
                                     <span class="help-block">
+
                         <strong></strong>
                       </span>
                                 </div>
@@ -140,8 +146,11 @@
                                         id="address"
 
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('address')}}
+                                    </div>
                                     <span class="help-block">
+
                         <strong></strong>
                       </span>
                                 </div>
@@ -160,8 +169,12 @@
                                         type="date"
                                         name="dateOfBirth"
                                         id="dateOfBirth">
-
+                                    <div class="text-danger">
+                                        {{$errors->first('dateOfBirth')}}
+                                    </div>
                                     <span class="help-block">
+
+
                         <strong></strong>
                       </span>
                                 </div>
@@ -182,7 +195,9 @@
                                         id="email"
 
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('email')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>

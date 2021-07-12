@@ -22,6 +22,8 @@
                         <table class="table" id="datatable">
                             <thead>
                             <tr>
+                                <th>DonorID</th>
+                                <th>Identity Number</th>
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Phone</th>
@@ -34,6 +36,8 @@
                             <tbody>
                             @foreach ($donors as $donor)
                                 <tr>
+                                    <td>{{$donor->donorID}}</td>
+                                    <td>{{$donor->identityNumber}}</td>
                                     <td>{{$donor->firstName }}</td>
                                     <td>{{$donor->lastName }}</td>
                                     <td>{{$donor->phone }}</td>

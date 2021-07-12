@@ -28,6 +28,33 @@
                             @csrf
                             @method('put')
                             <div class="form-group">
+                                <label for="identityNumber" class="col-md-2 control-label"
+                                >Identity Number</label
+                                >
+
+                                <div class="col-md-8">
+                                    <input
+                                        class="form-control"
+                                        required="required"
+                                        autofocus="autofocus"
+                                        name="identityNumber"
+                                        type="text"
+                                        value="{{$medicalPersonnel->identityNumber}}"
+                                        id="identityNumber"
+                                        maxlength="9"
+                                        minlength="9"
+                                    >
+                                    <div class="text-danger">
+                                        {{$errors->first('identityNumber')}}
+                                    </div>
+
+                                    <span class="help-block">
+                        <strong></strong>
+                      </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="firstName" class="col-md-2 control-label"
                                 >First Name</label
                                 >
@@ -42,7 +69,9 @@
                                         value="{{$medicalPersonnel->firstName}}"
                                         id="firstName"
                                     />
-
+                                    <div class="text-danger">
+                                        {{$errors->first('firstName')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -64,7 +93,9 @@
                                         value="{{$medicalPersonnel->lastName}}"
                                         id="lastName"
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('lastName')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -88,7 +119,9 @@
                                         maxlength="10"
                                         minlength="10"
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('phone')}}
+                                    </div>
 
                                     <span class="help-block">
                         <strong></strong>
@@ -112,6 +145,9 @@
                                         id="address"
 
                                     >
+                                    <div class="text-danger">
+                                        {{$errors->first('address')}}
+                                    </div>
 
                                     <span class="help-block">
                         <strong></strong>
@@ -134,7 +170,9 @@
                                         value="{{$medicalPersonnel->dateOfBirth}}"
                                         id="dateOfBirth"
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('dateOfBirth')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -155,7 +193,9 @@
                                         value="{{$medicalPersonnel->email}}"
                                         id="email"
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('email')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>

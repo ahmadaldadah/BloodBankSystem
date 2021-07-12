@@ -42,8 +42,8 @@
                                         name="identityNumber"
                                         type="text"
                                         id="identityNumber"
-                                        maxlength="10"
-                                        minlength="10"
+                                        maxlength="9"
+                                        minlength="9"
                                     />
 
                                     <div class="text-danger">

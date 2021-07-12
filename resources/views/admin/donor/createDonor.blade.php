@@ -88,8 +88,8 @@
                                         name="identityNumber"
                                         type="text"
                                         id="identityNumber"
-                                        maxlength="10"
-                                        minlength="10"
+                                        maxlength="9"
+                                        minlength="9"
                                     />
 
                                     <div class="text-danger">
@@ -137,6 +137,9 @@
                                         type="text"
                                         id="lastName"
                                     />
+                                    <div class="text-danger">
+                                        {{$errors->first('lastName')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -160,7 +163,9 @@
                                         minlength="10"
                                     >
 
-
+                                    <div class="text-danger">
+                                        {{$errors->first('phone')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -184,7 +189,9 @@
                                         id="address"
 
                                     >
-
+                                    <div class="text-danger">
+                                        {{$errors->first('address')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -204,7 +211,9 @@
                                         type="date"
                                         name="dateOfBirth"
                                         id="dateOfBirth">
-
+                                    <div class="text-danger">
+                                        {{$errors->first('dateOfBirth')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>
@@ -229,7 +238,9 @@
                                          <option value="{!! $blood_type->typeID !!}">{!! $blood_type->typeName!!}</option>
                                      @endforeach
                                  </select>
-
+                                    <div class="text-danger">
+                                        {{$errors->first('bloodType')}}
+                                    </div>
                                     <span class="help-block">
                         <strong></strong>
                       </span>

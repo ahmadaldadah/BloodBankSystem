@@ -30,6 +30,6 @@ class SampleChart extends BaseChart
         return Chartisan::build()
             ->labels($type_name)
             ->dataset('TotalQuantity', $totalQuantity)
-            ->dataset('Minimum Quantity', [50,50, 50, 50,50, 50, 50,50]);
+            ->dataset('Minimum Quantity', [10, 10, 10, 10, 10, 10, 10 , 10]);
     }
 }
