@@ -24,6 +24,7 @@
                             <thead>
                             <tr>
                                 <th>Emp ID</th>
+                                <th>Identity Number</th>
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Phone</th>
@@ -37,6 +38,7 @@
                             @foreach ($medical_personnels as $medical_personnel)
                                 <tr>
                                     <td>{{$medical_personnel->empID}}</td>
+                                    <td>{{$medical_personnel->identityNumber}}</td>
                                     <td>{{$medical_personnel->firstName }}</td>
                                     <td>{{$medical_personnel->lastName }}</td>
                                     <td>{{$medical_personnel->phone }}</td>
