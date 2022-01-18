@@ -13,7 +13,6 @@ use Illuminate\Http\Response;
 
 class BloodTransactionController extends Controller
 {
-
     function __construct()
     {
         $this->middleware('auth');
@@ -25,12 +24,9 @@ class BloodTransactionController extends Controller
      */
     public function index()
     {
-
         $blood_transactions = BloodTransaction::all();
-
         return view('admin.bloodTransaction.bloodTransaction' , compact('blood_transactions'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -38,9 +34,6 @@ class BloodTransactionController extends Controller
      */
     public function create()
     {
-        // if (Gate::denies('accessAdmin')) {
-        //     return redirect('/home');
-        // }
         return view('admin.bloodTransaction.createBloodTransaction' ,
             ['medical_personnels'=>MedicalPersonnel::all('empID','firstName') ,
                 'recipients'=>Recipient::all('recipientsID','firstName'),
@@ -61,9 +54,6 @@ class BloodTransactionController extends Controller
             'dateOut' => 'required',
             'quantity' => 'required',
             'recipientsID' => 'required',
-
-
-
         ]);
 
         $recipients = Recipient::where('recipientsID', '=', $request->recipientsID)->first();
@@ -76,19 +66,13 @@ class BloodTransactionController extends Controller
         $bloodTransaction->recipientsID = $request->recipientsID;
         $bloodTransaction->bloodType = $bloodType;
         $bloodTransaction->save();
-
-//        dd($donors);
-
-
         $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
-
         $data = [
             'typeID'=>$bloodTypes->typeID,
             'typeName'=>$bloodTypes->typeName,
             'totalQuantity'=>$bloodTypes->totalQuantity -= $request->quantity
         ];
         BloodType::where('typeID','=',$bloodType)->update($data);
-
         return redirect('bloodTransaction');
     }
 
@@ -101,7 +85,6 @@ class BloodTransactionController extends Controller
     public function show(int  $transactID)
     {
         $bloodTransaction = BloodTransaction::where('transactID', '=', $transactID)->first();
-
         return view('admin.bloodTransaction.showBloodTransaction')->with('bloodTransaction',$bloodTransaction);
     }
 
@@ -115,8 +98,6 @@ class BloodTransactionController extends Controller
     {
 
         $bloodTransaction = BloodTransaction::where('transactID', '=', $transactID)->first();
-
-
         return view('admin.bloodTransaction.editBloodTransaction')
             ->with('bloodTransaction' , $bloodTransaction)
             ->with('medical_personnels', MedicalPersonnel::all(['empID','firstName']))
@@ -142,13 +123,11 @@ class BloodTransactionController extends Controller
         }else{
             $value = $new - $previous;
         }
-
         $request->validate([
             'empID' => 'required',
             'dateOut' => 'required',
             'quantity' => 'required',
             'recipientsID' => 'required',
-
         ]);
         $data= request()->except(['_token','_method']);
         $bloodTransaction = BloodTransaction::where('transactID',$request->transactID) -> update($data);
@@ -166,13 +145,10 @@ class BloodTransactionController extends Controller
             'typeID'=>$bloodTypes->typeID,
             'typeName'=>$bloodTypes->typeName,
             'totalQuantity'=>$totalQuantity,
-
         ];
         BloodType::where('typeID','=',$bloodType)->update($data);
-
         return redirect('bloodTransaction');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -183,11 +159,8 @@ class BloodTransactionController extends Controller
     {
         $bloodTransaction = BloodTransaction::where('transactID', '=', $transactID)->first();
         $recipients = Recipient::where('recipientsID', '=', $bloodTransaction->recipientsID)->first();
-
         $bloodType = $recipients->bloodType;
-
         $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
-
         $data = [
             'typeID'=>$bloodTypes->typeID,
             'typeName'=>$bloodTypes->typeName,

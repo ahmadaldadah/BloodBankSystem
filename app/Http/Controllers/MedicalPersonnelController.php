@@ -20,9 +20,7 @@ class MedicalPersonnelController extends Controller
      */
     public function index()
     {
-
         $medical_personnels = MedicalPersonnel::all();
-
         return view('admin.medicalPersonnel.medicalPersonnel' , compact('medical_personnels'));
     }
 
@@ -33,9 +31,6 @@ class MedicalPersonnelController extends Controller
      */
     public function create()
     {
-        // if (Gate::denies('accessAdmin')) {
-        //     return redirect('/home');
-        // }
         return view('admin.medicalPersonnel.createMedicalPersonnel');
     }
 
@@ -47,9 +42,6 @@ class MedicalPersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $request->all();
-        // $request->input('title');
         $request->validate([
             'firstName' => 'required|max:10',
             'lastName' => 'required|max:10',
@@ -80,7 +72,6 @@ class MedicalPersonnelController extends Controller
     public function show(int  $empID)
     {
         $medicalPersonnel = MedicalPersonnel::where('empID', '=', $empID)->first();
-
         return view('admin.medicalPersonnel.showMedicalPersonnel')->with('medicalPersonnel',$medicalPersonnel);
     }
 
@@ -92,10 +83,7 @@ class MedicalPersonnelController extends Controller
      */
     public function edit(int  $empID)
     {
-
         $medicalPersonnel = MedicalPersonnel::where('empID', '=', $empID)->first();
-
-
         return view('admin.medicalPersonnel.editMedicalPersonnel')
             ->with('medicalPersonnel' , $medicalPersonnel);
     }
@@ -117,10 +105,8 @@ class MedicalPersonnelController extends Controller
         ]);
         $data= request()->except(['_token','_method']);
         $medicalPersonnel = MedicalPersonnel::where('empID',$empID) -> update($data );
-
         return redirect('medicalPersonnel');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -130,8 +116,6 @@ class MedicalPersonnelController extends Controller
     public function destroy($empID)
     {
         $medicalPersonnel = MedicalPersonnel::where('empID', '=', $empID)->delete();
-
-
         return redirect()->route('medicalPersonnel.index');
     }
 }

@@ -24,12 +24,9 @@ class BloodDonationController extends Controller
      */
     public function index()
     {
-
         $blood_donations = BloodDonation::all();
-
         return view('admin.bloodDonation.bloodDonation' , compact('blood_donations'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -37,9 +34,6 @@ class BloodDonationController extends Controller
      */
     public function create()
     {
-        // if (Gate::denies('accessAdmin')) {
-        //     return redirect('/home');
-        // }
         return view('admin.bloodDonation.createBloodDonation',['donors'=>Donor::all('donorID','firstName')]);
     }
 
@@ -51,15 +45,10 @@ class BloodDonationController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $request->all();
-        // $request->input('title');
         $request->validate([
             'donorID' => 'required',
             'dateDonated' => 'required',
             'quantity' => 'required'
-
-
         ]);
 
         $bloodDonation = new BloodDonation();
@@ -67,22 +56,15 @@ class BloodDonationController extends Controller
         $bloodDonation->dateDonated = $request->dateDonated;
         $bloodDonation->quantity = $request->quantity;
         $bloodDonation->save();
-
         $donors = Donor::where('donorID', '=', $request->donorID)->first();
-//        dd($donors);
-
         $bloodType = $donors->bloodType;
-
         $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
-
         $data = [
             'typeID'=>$bloodTypes->typeID,
             'typeName'=>$bloodTypes->typeName,
             'totalQuantity'=>$bloodTypes->totalQuantity += $request->quantity
         ];
         BloodType::where('typeID','=',$bloodType)->update($data);
-
-
         return redirect('bloodDonation');
     }
 
@@ -134,7 +116,6 @@ class BloodDonationController extends Controller
         }else{
             $value = $new - $previous;
         }
-
         $request->validate([
             'donorID' => 'required',
             'dateDonated' => 'required',
@@ -155,13 +136,10 @@ class BloodDonationController extends Controller
             'typeID'=>$bloodTypes->typeID,
             'typeName'=>$bloodTypes->typeName,
             'totalQuantity'=>$totalQuantity,
-
         ];
         BloodType::where('typeID','=',$bloodType)->update($data);
-
         return redirect('bloodDonation');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -172,11 +150,8 @@ class BloodDonationController extends Controller
     {
         $bloodDonation = BloodDonation::where('bloodID', '=', $bloodID)->first();
         $donor = Donor::where('donorID', '=', $bloodDonation->donorID)->first();
-
         $bloodType = $donor->bloodType;
-
         $bloodTypes = BloodType::where('typeID','=',$bloodType)->first();
-
         $data = [
             'typeID'=>$bloodTypes->typeID,
             'typeName'=>$bloodTypes->typeName,
@@ -184,7 +159,6 @@ class BloodDonationController extends Controller
         ];
         BloodType::where('typeID','=',$bloodType)->update($data);
         BloodDonation::where('bloodID', '=', $bloodID)->delete();
-
         return redirect()->route('bloodDonation.index');
     }
 }

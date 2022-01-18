@@ -47,8 +47,6 @@
                                     <td>{{"A+"}}</td>
                                     @elseif($donor->bloodType == 2)
                                         <td>{{"A-"}}</td>
-                                    @elseif($donor->bloodType == 2)
-                                        <td>{{"A-"}}</td>
                                     @elseif($donor->bloodType == 3)
                                         <td>{{"B+"}}</td>
                                     @elseif($donor->bloodType == 4)

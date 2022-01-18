@@ -20,9 +20,7 @@ class RecipientController extends Controller
      */
     public function index()
     {
-
         $recipients = Recipient::all();
-
         return view('admin.recipient.recipient' , compact('recipients'));
     }
 
@@ -33,9 +31,7 @@ class RecipientController extends Controller
      */
     public function create()
     {
-        // if (Gate::denies('accessAdmin')) {
-        //     return redirect('/home');
-        // }
+
         return view('admin.recipient.createRecipient',['blood_types'=>BloodType::all('typeID','typeName')]);
     }
 
@@ -54,8 +50,6 @@ class RecipientController extends Controller
             'identityNumber' => 'required',
             'phone' => 'required',
             'bloodType' => 'required|max:3'
-
-
         ]);
 
         $recipient = new Recipient();
@@ -93,8 +87,6 @@ class RecipientController extends Controller
     {
 
         $recipient = Recipient::where('recipientsID', '=', $recipientsID)->first();
-
-
         return view('admin.recipient.editRecipient')
             ->with('recipient' , $recipient)
             ->with('blood_types',BloodType::all('typeID','typeName'));
@@ -119,7 +111,6 @@ class RecipientController extends Controller
         ]);
         $data= request()->except(['_token','_method']);
         $recipient = Recipient::where('recipientsID',$recipientsID) -> update($data );
-
         return redirect('recipient');
     }
 
@@ -132,8 +123,6 @@ class RecipientController extends Controller
     public function destroy($recipientsID)
     {
         $recipient = Recipient::where('recipientsID', '=', $recipientsID)->delete();
-
-
         return redirect()->route('recipient.index');
     }
 }

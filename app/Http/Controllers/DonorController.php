@@ -25,12 +25,9 @@ class DonorController extends Controller
      */
     public function index()
     {
-
         $donors = Donor::all();
-
         return view('admin.donor.donor' , compact('donors'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -38,12 +35,8 @@ class DonorController extends Controller
      */
     public function create()
     {
-        // if (Gate::denies('accessAdmin')) {
-        //     return redirect('/home');
-        // }
         return view('admin.donor.createDonor',['blood_types'=>BloodType::all('typeID','typeName')]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -52,7 +45,6 @@ class DonorController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'email' => 'required',
             'identityNumber' => 'required',
@@ -61,16 +53,12 @@ class DonorController extends Controller
             'lastName' => 'required|max:10',
             'phone' => 'required',
             'bloodType' => 'required|max:3'
-
-
         ]);
-
         $user = new User();
         $user->email=$request->email;
         $user->password= Hash::make($request['password']);
         $user->name = $request->firstName." ".$request->lastName;
         $user->save();
-
         $donor = new Donor();
         $donor->user_id  = $user->id;
         $donor->identityNumber = $request->identityNumber;
